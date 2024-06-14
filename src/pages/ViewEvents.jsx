@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, VStack, Heading, Box, Text, Button, Flex } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ViewEvents = () => {
   const [events, setEvents] = useState([]);
@@ -26,9 +26,11 @@ const ViewEvents = () => {
         ) : (
           events.map((event) => (
             <Box key={event.id} p={4} borderWidth="1px" borderRadius="lg" width="100%">
-              <Heading as="h3" size="md">{event.title}</Heading>
-              <Text>{event.description}</Text>
-              <Text>{event.date}</Text>
+              <Link to={`/event-details/${event.id}`}>
+                <Heading as="h3" size="md">{event.title}</Heading>
+                <Text>{event.description}</Text>
+                <Text>{event.date}</Text>
+              </Link>
               <Flex mt={2} justifyContent="space-between">
                 <Button colorScheme="blue" onClick={() => navigate(`/edit-event/${event.id}`)}>Edit</Button>
                 <Button colorScheme="red" onClick={() => handleDelete(event.id)}>Delete</Button>
